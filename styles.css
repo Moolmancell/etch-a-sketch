@@ -34,3 +34,14 @@
 .row {
     box-sizing: border-box;
 }
+
+#noOfPixels {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#select1, #select2 {
+    display: block;
+    text-align: center;
+}
