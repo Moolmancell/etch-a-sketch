@@ -34,14 +34,16 @@
 .row {
     box-sizing: border-box;
 }
-
+.column:last-child .row {
+    border-bottom: 1px solid black;
+}
 #noOfPixels {
     display: block;
     text-align: center;
     margin-top: 20px;
 }
 
-#select1, #select2, #select3, #eraseButton {
+#select1, #select2, #select3, #select4, #eraseButton {
     display: block;
     text-align: center;
     margin: auto;
