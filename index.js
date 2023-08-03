@@ -4,9 +4,10 @@ const pixelNo = document.getElementById("pixelNumber");
 let canvasWidth = canvas.offsetWidth;
 let canvasHeight = canvas.offsetHeight;
 const black = document.getElementById("black");
-const RGB = document.getElementById("RGB")
-const eraser = document.getElementById("eraser")
-const resetButton = document.getElementById("eraseButton")
+const RGB = document.getElementById("RGB");
+const eraser = document.getElementById("eraser");
+const HSV = document.getElementById("HSV");
+const resetButton = document.getElementById("eraseButton");
 let pixels;
 let grid = spawnGrid(16);
 
@@ -35,6 +36,26 @@ function randomHexColor() {
     return "#" + hr + hg + hb;
 }
 
+function darken(color) {
+    let allRawValues = color.replace(/[^\w\s]/gi, '').replace("rgb", "")
+    let allValuesArray = allRawValues.split(" ");
+    let value;
+
+    if (+allValuesArray[0] === +allValuesArray[1] && 
+        +allValuesArray[0] === +allValuesArray[2] &&
+        +allValuesArray[0]%11 === 0 &&
+        +allValuesArray[0] <= 110
+        ) {
+        value = +allValuesArray[0]
+    } 
+    
+    if (value === undefined) {
+        return "rgb(110, 110, 110)"
+    } 
+
+    return `rgb(${value-11}, ${value-11}, ${value-11})`
+}
+
 function spawnGrid(gridNo) {
     if (gridNo < 2) {
         gridNo = 2;
@@ -52,6 +73,7 @@ function spawnGrid(gridNo) {
             row.classList.add("row");
             row.style.height = `${canvasHeight/gridNo}px`;
             row.style.width = `${canvasWidth/gridNo}px`;
+            row.style.backgroundColor = "rgb(255, 255, 255)"
             column.appendChild(row);
         }
     }
@@ -59,19 +81,21 @@ function spawnGrid(gridNo) {
     pixels.forEach(pixel => {
         pixel.addEventListener("mouseover", (e) => {
             if (black.checked === true) {
-                e.target.style.backgroundColor = "black";
+                e.target.style.backgroundColor = "rgb(0, 0, 0)";
             } else if (RGB.checked === true){
                 e.target.style.backgroundColor = `${randomHexColor()}`;
             } else if (eraser.checked === true) {
-                e.target.style.backgroundColor = "";
+                e.target.style.backgroundColor = "rgb(255, 255, 255)";
+            } else if (HSV.checked === true) {
+                e.target.style.backgroundColor = darken(e.target.style.backgroundColor)
             }
-           
+            //console.log(e.target.style.backgroundColor)
         })
        });
 }
 
 resetButton.addEventListener("click", () => {
     pixels.forEach(pixel => {
-        pixel.style.backgroundColor = "";
+        pixel.style.backgroundColor = "rgb(255, 255, 255)";
     });
 })
