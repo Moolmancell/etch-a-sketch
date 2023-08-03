@@ -41,7 +41,8 @@
     margin-top: 20px;
 }
 
-#select1, #select2 {
+#select1, #select2, #select3, #eraseButton {
     display: block;
     text-align: center;
+    margin: auto;
 }

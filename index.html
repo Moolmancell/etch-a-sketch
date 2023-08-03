@@ -8,9 +8,11 @@
     <script src="index.js" defer></script>
 </head>
 <body> 
-    <div class="canvas"></div>
+    <div class="canvas" id="canvas"></div>
     <label id="noOfPixels"  for="pixelNumber">No. of Pixels (2-64): <input id="pixelNumber" type="number" min="2" max="64"></label>
     <label id="select1" for="black">Black<input type="radio" id="black" name="color" value="black" checked></label>
     <label id="select2" for="RGB">RGB<input type="radio" id="RGB" name="color" value="RGB"></label>
+    <label id="select3" for="eraser">Eraser<input type="radio" id="eraser" name="color" value="eraser"></label>
+    <button id="eraseButton">Erase All</button>
 </body>
 </html>
